@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholar Sphere - Redirecting</title>
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+    <style>
+        :root {
+            --light-bg: #f8f9fa;
+            --light-text: #333;
+            --light-link: #4B4EFC;
+            
+            --dark-bg: #121212;
+            --dark-text: #e0e0e0;
+            --dark-link: #6A6CFF;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: var(--light-bg);
+            color: var(--light-text);
+        }
+        
+        [data-theme="dark"] body {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        
+        .redirect-container {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        h1 {
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            margin-bottom: 2rem;
+        }
+        
+        a {
+            color: var(--light-link);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        [data-theme="dark"] a {
+            color: var(--dark-link);
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <meta http-equiv="refresh" content="2;url=pages/home.html">
+</head>
+<body>
+    <div class="redirect-container">
+        <h1>Scholar Sphere</h1>
+        <p>Redirecting to homepage...</p>
+        <p>If you are not redirected automatically, <a href="pages/home.html">click here</a>.</p>
+    </div>
+</body>
+</html> 
