@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholar Sphere - AI-Powered Learning Tools</title>
+    <link rel="icon" href="../assets/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <!-- Preloader script -->
+    <script>
+        // Add class to prevent transitions during page load
+        document.documentElement.classList.add('no-transition');
+        
+        // Listen for page load
+        window.addEventListener('load', function() {
+            // Get preloader element
+            const preloader = document.getElementById('preloader');
+            // Hide preloader
+            preloader.style.opacity = '0';
+            // Remove preloader after transition
+            setTimeout(() => {
+                preloader.style.display = 'none';
+                // Remove no-transition class to enable transitions
+                document.documentElement.classList.remove('no-transition');
+            }, 300);
+        });
+    </script>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader"></div>
+    
+    <div class="container home-container">
+        <!-- Theme Toggle Button -->
+        <button id="themeToggle" class="theme-toggle">
+            <svg class="sun-icon" viewBox="0 0 24 24">
+                <path d="M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3zm0-2c.28 0 .5-.22.5-.5v-3c0-.28-.22-.5-.5-.5s-.5.22-.5.5v3c0 .28.22.5.5.5zm0 14c-.28 0-.5.22-.5.5v3c0 .28.22.5.5.5s.5-.22.5-.5v-3c0-.28-.22-.5-.5-.5zm8.5-8.5h-3c-.28 0-.5.22-.5.5s.22.5.5.5h3c.28 0 .5-.22.5-.5s-.22-.5-.5-.5zm-14 0h-3c-.28 0-.5.22-.5.5s.22.5.5.5h3c.28 0 .5-.22.5-.5s-.22-.5-.5-.5z"/>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24">
+                <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+            </svg>
+        </button>
+
+        <div class="about-link">
+            <button id="aboutBtn" class="about-btn">About Site</button>
+        </div>
+
+        <div class="hero-section">
+            <h1 class="hero-title">Scholar Sphere</h1>
+            <p class="hero-subtitle">AI-Powered Learning Tools</p>
+            <div class="hero-description">
+                <p>Create customized quizzes and grade essays with AI in seconds.</p>
+                <p>Perfect for students, teachers, and lifelong learners.</p>
+            </div>
+            
+            <!-- Updated tool cards layout to be horizontal -->
+            <div class="hero-tools">
+                <div class="tool-card">
+                    <div class="tool-icon">📝</div>
+                    <h3>AI Quiz Generator</h3>
+                    <p>Create custom quizzes from any text or document</p>
+                    <a href="quiz.html" class="btn btn-primary">Create Quiz</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">📄</div>
+                    <h3>Essay Assistant</h3>
+                    <p>Get feedback and suggestions on your essays</p>
+                    <a href="essay.html" class="btn btn-primary">Improve Essay</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">🎓</div>
+                    <h3>AP Test Prep</h3>
+                    <p>Practice with AI-generated AP-style questions</p>
+                    <a href="ap-tests.html" class="btn btn-primary">Start Practice</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2v-4H8v-2h4V7h2v4h4v2h-4v4z"/>
+                        </svg>
+                    </div>
+                    <h3>Text & PDF Support</h3>
+                    <p>Generate quizzes from plain text or upload PDF documents.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+                        </svg>
+                    </div>
+                    <h3>Customizable</h3>
+                    <p>Choose question count, difficulty level, and question types.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                    </div>
+                    <h3>Timed Quizzes</h3>
+                    <p>Optional timer feature to simulate exam conditions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm-2 14l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                        </svg>
+                    </div>
+                    <h3>Instant Feedback</h3>
+                    <p>Get detailed explanations and scores immediately after submission.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="how-it-works">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Input Your Content</h3>
+                        <p>Enter text directly or upload a PDF document.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Customize Settings</h3>
+                        <p>Set options like difficulty level, question type, or grading criteria.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Generate Results</h3>
+                        <p>Our AI creates questions or analyzes your essay.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Review Results</h3>
+                        <p>Get instant feedback, scores, and explanations.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cta-buttons">
+                <a href="quiz.html" class="btn">Create Quiz</a>
+                <a href="essay.html" class="btn btn-secondary">Grade Essay</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="aboutModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>About Scholar Sphere</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Scholar Sphere was created by Shreyas Jambapuram, a high school student passionate about making learning more interactive and efficient.</p>
+                <p>This AI-powered learning platform helps students and teachers create customized quizzes and grade essays.</p>
+                <div class="creator-info">
+                    <h3>Creator</h3>
+                    <p>Shreyas Jambapuram</p>
+                    <p class="subtitle">High School Student</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2023 Scholar Sphere. All rights reserved.</p>
+    </footer>
+
+    <script src="../assets/js/modules/config.js" type="module"></script>
+    <script src="../assets/js/home.js" type="module"></script>
+</body>
+</html> 

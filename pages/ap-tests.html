@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholar Sphere - AP Test Prep</title>
+    <link rel="icon" href="../assets/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <!-- Preloader script -->
+    <script>
+        // Add class to prevent transitions during page load
+        document.documentElement.classList.add('no-transition');
+        
+        // Listen for page load
+        window.addEventListener('load', function() {
+            // Get preloader element
+            const preloader = document.getElementById('preloader');
+            // Hide preloader
+            preloader.style.opacity = '0';
+            // Remove preloader after transition
+            setTimeout(() => {
+                preloader.style.display = 'none';
+                // Remove no-transition class to enable transitions
+                document.documentElement.classList.remove('no-transition');
+            }, 300);
+        });
+    </script>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader"></div>
+    
+    <div class="container">
+        <nav class="site-nav">
+            <a href="home.html" class="nav-home">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+                Home
+            </a>
+            <div class="about-link">
+                <button id="aboutBtn" class="about-btn">About Site</button>
+            </div>
+        </nav>
+        <!-- Theme Toggle Button -->
+        <button id="themeToggle" class="theme-toggle">
+            <svg class="sun-icon" viewBox="0 0 24 24">
+                <path d="M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3zm0-2c.28 0 .5-.22.5-.5v-3c0-.28-.22-.5-.5-.5s-.5.22-.5.5v3c0 .28.22.5.5.5zm0 14c-.28 0-.5.22-.5.5v3c0 .28.22.5.5.5s.5-.22.5-.5v-3c0-.28-.22-.5-.5-.5zm8.5-8.5h-3c-.28 0-.5.22-.5.5s.22.5.5.5h3c.28 0 .5-.22.5-.5s-.22-.5-.5-.5zm-14 0h-3c-.28 0-.5.22-.5.5s.22.5.5.5h3c.28 0 .5-.22.5-.5s-.22-.5-.5-.5z"/>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24">
+                <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+            </svg>
+        </button>
+
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="loading-screen">
+            <div class="loader"></div>
+            <p>Loading AP test materials...</p>
+        </div>
+
+        <!-- AP Test Selection Section -->
+        <section id="apSelectionSection" class="ap-selection-section">
+            <div class="ap-selection-header">
+                <h1>AP Test Practice</h1>
+                <p class="ap-selection-subheading">Select an AP subject to practice questions organized by unit and topic</p>
+            </div>
+            
+            <div class="ap-categories">
+                <div class="ap-category math-science">
+                    <h3>Math & Science</h3>
+                    <div class="ap-tests-grid">
+                        <button class="ap-test-btn" data-test="calculus-ab">♾️ AP Calculus AB</button>
+                        <button class="ap-test-btn" data-test="calculus-bc">♾️ AP Calculus BC</button>
+                        <button class="ap-test-btn" data-test="statistics">📊 AP Statistics</button>
+                        <button class="ap-test-btn" data-test="pre-calculus">📈 AP Pre-Calculus</button>
+                        <button class="ap-test-btn" data-test="biology">🧬 AP Biology</button>
+                        <button class="ap-test-btn" data-test="chemistry">🧪 AP Chemistry</button>
+                        <button class="ap-test-btn" data-test="physics-1">🎡 AP Physics 1</button>
+                        <button class="ap-test-btn" data-test="physics-2">🧲 AP Physics 2</button>
+                        <button class="ap-test-btn" data-test="physics-c-mechanics">⚙️ AP Physics C: Mechanics</button>
+                        <button class="ap-test-btn" data-test="physics-c-electricity">💡 AP Physics C: E&M</button>
+                        <button class="ap-test-btn" data-test="environmental-science">♻️ AP Environmental Science</button>
+                        <button class="ap-test-btn" data-test="computer-science-a">💻 AP Computer Science A</button>
+                        <button class="ap-test-btn" data-test="computer-science-principles">⌨️ AP Computer Science P</button>
+                    </div>
+                </div>
+
+                <div class="ap-category language-lit">
+                    <h3>Language & Literature</h3>
+                    <div class="ap-tests-grid">
+                        <button class="ap-test-btn" data-test="english-language">✍🏽 AP English Language</button>
+                        <button class="ap-test-btn" data-test="english-literature">📚 AP English Literature</button>
+                        <button class="ap-test-btn" data-test="spanish-language">🇪🇸 AP Spanish Language</button>
+                        <button class="ap-test-btn" data-test="spanish-literature">💃🏽 AP Spanish Literature</button>
+                        <button class="ap-test-btn" data-test="french-language">🇫🇷 AP French</button>
+                        <button class="ap-test-btn" data-test="german-language">🇩🇪 AP German</button>
+                        <button class="ap-test-btn" data-test="chinese-language">🇨🇳 AP Chinese</button>
+                        <button class="ap-test-btn" data-test="japanese-language">🇯🇵 AP Japanese</button>
+                        <button class="ap-test-btn" data-test="italian-language">🇮🇹 AP Italian</button>
+                        <button class="ap-test-btn" data-test="latin">🏛️ AP Latin</button>
+                    </div>
+                </div>
+
+                <div class="ap-category history-social">
+                    <h3>History & Social Sciences</h3>
+                    <div class="ap-tests-grid">
+                        <button class="ap-test-btn" data-test="us-history">🇺🇸 AP US History</button>
+                        <button class="ap-test-btn" data-test="world-history">🌍 AP World History: Modern</button>
+                        <button class="ap-test-btn" data-test="european-history">🇪🇺 AP European History</button>
+                        <button class="ap-test-btn" data-test="human-geography">🚜 AP Human Geography</button>
+                        <button class="ap-test-btn" data-test="psychology">🧠 AP Psychology</button>
+                        <button class="ap-test-btn" data-test="us-government">🧑🏽‍⚖️ AP US Government</button>
+                        <button class="ap-test-btn" data-test="comparative-government">🗳️ AP Comparative Government</button>
+                        <button class="ap-test-btn" data-test="macroeconomics">💵 AP Macroeconomics</button>
+                        <button class="ap-test-btn" data-test="microeconomics">🤑 AP Microeconomics</button>
+                        <button class="ap-test-btn" data-test="african-american-studies">✊🏿 AP African American Studies</button>
+                    </div>
+                </div>
+
+                <div class="ap-category arts">
+                    <h3>Arts</h3>
+                    <div class="ap-tests-grid">
+                        <button class="ap-test-btn" data-test="art-history">🖼️ AP Art History</button>
+                        <button class="ap-test-btn" data-test="studio-art-2d">🎨 AP Art & Design: 2D</button>
+                        <button class="ap-test-btn" data-test="studio-art-3d">🎨 AP Art & Design: 3D</button>
+                        <button class="ap-test-btn" data-test="studio-art-drawing">🎨 AP Art & Design: Drawing</button>
+                        <button class="ap-test-btn" data-test="music-theory">🎶 AP Music Theory</button>
+                    </div>
+                </div>
+
+                <div class="ap-category capstone">
+                    <h3>AP Capstone</h3>
+                    <div class="ap-tests-grid">
+                        <button class="ap-test-btn" data-test="seminar">💬 AP Seminar</button>
+                        <button class="ap-test-btn" data-test="research">🔍 AP Research</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- AP Course Content Section (initially hidden) -->
+        <section id="apCourseSection" class="ap-course-section hidden">
+            <div class="ap-course-header">
+                <button id="backToApTests" class="btn-back">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                    </svg>
+                    Back to AP Tests
+                </button>
+                <h2 id="apCourseName">AP Course Name</h2>
+            </div>
+
+            <!-- AP Countdown Timer -->
+            <div id="apCountdownArea" class="hidden"></div>
+
+            <div class="ap-course-overview">
+                <div class="ap-course-description">
+                    <h3>Course Overview</h3>
+                    <p id="apCourseDescription">Course description will appear here.</p>
+                </div>
+                <div class="ap-exam-format">
+                    <h3>Exam Format</h3>
+                    <p id="apExamFormat">Exam format details will appear here.</p>
+                </div>
+            </div>
+
+            <div class="ap-units-container">
+                <h3>Units</h3>
+                <div id="apUnitsAccordion" class="accordion">
+                    <!-- Units will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <div class="full-practice-test">
+                <h3>Full Practice Tests</h3>
+                <p>Complete a timed practice test that simulates the actual AP exam format.</p>
+                <button id="startFullPracticeTest" class="btn">Start Full Practice Test</button>
+            </div>
+        </section>
+
+        <!-- AP Practice Questions Section (initially hidden) -->
+        <section id="apQuestionsSection" class="ap-questions-section hidden">
+            <div class="ap-questions-header">
+                <button id="backToApCourse" class="btn-back">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                    </svg>
+                    Back to Course
+                </button>
+                <h2 id="apQuestionsTitle">Unit Questions</h2>
+            </div>
+
+            <div class="timer-container hidden" id="timerContainer">
+                <div class="timer">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                    </svg>
+                    <span id="timerDisplay">00:00:00</span>
+                </div>
+            </div>
+
+            <form id="apQuestionsForm" class="questions-container">
+                <!-- Questions will be dynamically inserted here -->
+            </form>
+
+            <div class="ap-questions-footer">
+                <button type="button" id="submitApQuestions" class="btn">Submit Answers</button>
+            </div>
+        </section>
+
+        <!-- AP Results Section (initially hidden) -->
+        <section id="apResultsSection" class="results-section hidden">
+            <div class="results-content">
+                <div class="total-score">
+                    <h2>Practice Test Results</h2>
+                    <div class="score-display">
+                        <span class="score-number">0%</span>
+                        <span class="score-details">0 out of 0 correct</span>
+                    </div>
+                </div>
+                <div id="apResultsContainer">
+                    <!-- Results will be dynamically inserted here -->
+                </div>
+                <div class="results-buttons">
+                    <button type="button" id="returnToUnit" class="btn">Return to Unit</button>
+                    <button type="button" id="tryAnotherSet" class="btn btn-secondary">Try Another Set</button>
+                    <button type="button" id="backToCourse" class="btn btn-secondary">Back to Course</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="aboutModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>About Scholar Sphere</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Scholar Sphere was created by Shreyas Jambapuram, a high school student passionate about making learning more interactive and efficient.</p>
+                <p>This AI-powered learning platform helps students and teachers create customized quizzes and grade essays.</p>
+                <div class="creator-info">
+                    <h3>Creator</h3>
+                    <p>Shreyas Jambapuram</p>
+                    <p class="subtitle">High School Student</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/modules/config.js" type="module"></script>
+    <script src="../assets/js/ap-tests.js" type="module"></script>
+</body>
+</html> 

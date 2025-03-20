@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholar Sphere - Essay Assistant</title>
+    <link rel="icon" href="../assets/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <!-- Preloader script -->
+    <script>
+        // Add class to prevent transitions during page load
+        document.documentElement.classList.add('no-transition');
+        
+        // Listen for page load
+        window.addEventListener('load', function() {
+            // Get preloader element
+            const preloader = document.getElementById('preloader');
+            // Hide preloader
+            preloader.style.opacity = '0';
+            // Remove preloader after transition
+            setTimeout(() => {
+                preloader.style.display = 'none';
+                // Remove no-transition class to enable transitions
+                document.documentElement.classList.remove('no-transition');
+            }, 300);
+        });
+    </script>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader"></div>
+    
+    <div class="container">
+        <nav class="site-nav">
+            <a href="home.html" class="nav-home">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+                Home
+            </a>
+            <div class="about-link">
+                <button id="aboutBtn" class="about-btn">About Site</button>
+            </div>
+        </nav>
+        
+        <!-- Theme Toggle Button -->
+        <button id="themeToggle" class="theme-toggle">
+            <svg class="sun-icon" viewBox="0 0 24 24">
+                <path d="M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3zm0-2c.28 0 .5-.22.5-.5v-3c0-.28-.22-.5-.5-.5s-.5.22-.5.5v3c0 .28.22.5.5.5zm0 14c-.28 0-.5.22-.5.5v3c0 .28.22.5.5.5s.5-.22.5-.5v-3c0-.28-.22-.5-.5-.5zm8.5-8.5h-3c-.28 0-.5.22-.5.5s.22.5.5.5h3c.28 0 .5-.22.5-.5s-.22-.5-.5-.5zm-14 0h-3c-.28 0-.5.22-.5.5s.22.5.5.5h3c.28 0 .5-.22.5-.5s-.22-.5-.5-.5z"/>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24">
+                <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+            </svg>
+        </button>
+
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="loading-screen hidden">
+            <div class="loader"></div>
+            <p>Analyzing your essay...</p>
+        </div>
+
+        <h1>Essay Grader</h1>
+        
+        <!-- Essay Grading Form -->
+        <form id="essayForm" class="essay-form">
+            <div class="form-group">
+                <label for="essayInput">Enter Your Essay</label>
+                <textarea id="essayInput" rows="10" placeholder="Paste or type your essay here..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="fileInput">Upload a Text or PDF File:</label>
+                <div class="file-input-wrapper">
+                    <input type="file" id="fileInput" accept=".txt,.pdf">
+                    <label for="fileInput" class="file-input-label">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                        Choose a file
+                    </label>
+                    <span class="file-name">No file chosen</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="gradeLevel">Grade Level:</label>
+                <select id="gradeLevel" class="form-select">
+                    <option value="middle-school">Middle School</option>
+                    <option value="high-school" selected>High School</option>
+                    <option value="college">College</option>
+                    <option value="graduate">Graduate Level</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="essayType">Essay Type:</label>
+                <select id="essayType" class="form-select">
+                    <option value="argumentative">Argumentative</option>
+                    <option value="expository">Expository</option>
+                    <option value="narrative">Narrative</option>
+                    <option value="persuasive">Persuasive</option>
+                    <option value="research">Research Paper</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <div class="rubric-toggle">
+                    <label class="switch">
+                        <input type="checkbox" id="rubricToggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span>Use Custom Rubric</span>
+                </div>
+                <div id="rubricContainer" class="hidden">
+                    <label for="rubricText">Enter Grading Rubric:</label>
+                    <textarea id="rubricText" rows="4" placeholder="Enter your custom grading criteria..."></textarea>
+                </div>
+            </div>
+
+            <button type="submit" id="gradeBtn" class="btn">Grade Essay</button>
+        </form>
+
+        <!-- Essay Results Section -->
+        <section id="resultsSection" class="results-section hidden">
+            <div class="results-content">
+                <div class="total-score">
+                    <h2>Essay Evaluation</h2>
+                    <div class="grade-display">B+</div>
+                </div>
+                <div id="feedbackContainer">
+                    <!-- Feedback will be dynamically inserted here -->
+                </div>
+                <div class="results-buttons">
+                    <button type="button" id="newEssay" class="btn">Grade New Essay</button>
+                    <a href="home.html" class="btn btn-secondary">Back to Home</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="aboutModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>About Scholar Sphere</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Scholar Sphere was created by Shreyas Jambapuram, a high school student passionate about making learning more interactive and efficient.</p>
+                <p>This AI-powered learning platform helps students and teachers create customized quizzes and grade essays.</p>
+                <div class="creator-info">
+                    <h3>Creator</h3>
+                    <p>Shreyas Jambapuram</p>
+                    <p class="subtitle">High School Student</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/modules/config.js" type="module"></script>
+    <script src="../assets/js/essay.js" type="module"></script>
+</body>
+</html> 
