@@ -1,14 +1,30 @@
 // Import configuration
-import { API_KEY, API_URL, MODEL_ID } from './modules/config.js';
+import { GEMINI_API_KEY, GEMINI_API_URL, MODEL_ID } from './modules/config.js';
 
-// First, declare the state object
+// First, declare the state object with default values
 const state = {
     currentCourse: null,
     currentUnit: null,
     currentTopic: null,
     currentQuestions: [],
     timerInterval: null,
-    examDuration: 90 * 60 // 90 minutes in seconds
+    examDuration: 90 * 60 // 90 minutes in seconds as default
+};
+
+// Add configuration constants specific to AP tests
+const AP_TEST_CONFIG = {
+    examDuration: 90 * 60, // 90 minutes in seconds
+    questionsPerTest: 45,  // Default number of questions
+    endpoints: {
+        questions: '/api/questions',
+        results: '/api/results',
+    },
+    features: {
+        enableTimer: true,
+        enableScoring: true,
+        enableReview: true,
+        enableProgress: true
+    }
 };
 
 // Then declare the apCoursesData object with all course data
@@ -3542,6 +3558,31 @@ const elements = {
     apCountdownArea: document.getElementById('apCountdownArea')
 };
 
+// Initialize timer function
+function initializeTimer() {
+    if (AP_TEST_CONFIG.features.enableTimer) {
+        const timerContainer = document.getElementById('timerContainer');
+        const timerDisplay = document.getElementById('timerDisplay');
+        let timeRemaining = AP_TEST_CONFIG.examDuration;
+        
+        timerContainer.classList.remove('hidden');
+        
+        state.timerInterval = setInterval(() => {
+            timeRemaining--;
+            const hours = Math.floor(timeRemaining / 3600);
+            const minutes = Math.floor((timeRemaining % 3600) / 60);
+            const seconds = timeRemaining % 60;
+            
+            timerDisplay.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            
+            if (timeRemaining <= 0) {
+                clearInterval(state.timerInterval);
+                submitQuiz();
+            }
+        }, 1000);
+    }
+}
+
 // Function to generate quiz button for topics
 function handleQuizButtonClick(topic) {
     console.log('Quiz button clicked for topic:', topic);
@@ -3872,32 +3913,23 @@ function displayQuizResults(answers, score, totalQuestions) {
         resultsContainer.innerHTML += resultHTML;
     });
     
-    // Remove existing event listeners before adding new ones
-    elements.returnToUnit.removeEventListener('click', returnToUnitHandler);
-    elements.tryAnotherSet.removeEventListener('click', tryAnotherSetHandler);
-    elements.backToCourse.removeEventListener('click', backToCourseHandler);
-    
-    // Define handler functions
-    const returnToUnitHandler = () => {
+    // Add event listeners to result buttons
+    elements.returnToUnit.addEventListener('click', () => {
         elements.apResultsSection.classList.add('hidden');
         elements.apCourseSection.classList.remove('hidden');
-    };
+    });
     
-    const tryAnotherSetHandler = () => {
+    elements.tryAnotherSet.addEventListener('click', () => {
         elements.apResultsSection.classList.add('hidden');
         elements.apQuestionsSection.classList.remove('hidden');
+        // Regenerate questions
         generateQuizForTopic(state.currentCourse, state.currentUnit, state.currentTopic);
-    };
+    });
     
-    const backToCourseHandler = () => {
+    elements.backToCourse.addEventListener('click', () => {
         elements.apResultsSection.classList.add('hidden');
         elements.apCourseSection.classList.remove('hidden');
-    };
-    
-    // Add event listeners
-    elements.returnToUnit.addEventListener('click', returnToUnitHandler);
-    elements.tryAnotherSet.addEventListener('click', tryAnotherSetHandler);
-    elements.backToCourse.addEventListener('click', backToCourseHandler);
+    });
 }
 
 // Function to generate explanation if none provided
@@ -3995,9 +4027,8 @@ function generateUnitsAccordion(units) {
     // Generate HTML for each unit
     units.forEach((unit, index) => {
         const unitId = `unit-${index + 1}`;
-        const isActive = index === 0 ? 'active' : '';
         
-        // Generate topics list
+        // Remove the isActive variable since we want all closed by default
         const topicsList = unit.topics.map(topic => {
             // Check if topic is an object with name and subtopics
             if (typeof topic === 'object' && topic.name && topic.subtopics) {
@@ -4031,7 +4062,7 @@ function generateUnitsAccordion(units) {
         
         const unitHTML = `
             <div class="accordion-item">
-                <div class="accordion-header ${isActive}" data-target="${unitId}">
+                <div class="accordion-header" data-target="${unitId}">
                     <div class="accordion-title">
                         <span>${unit.name}</span>
                     </div>
@@ -4041,7 +4072,7 @@ function generateUnitsAccordion(units) {
                         </svg>
                     </div>
                 </div>
-                <div id="${unitId}" class="accordion-content ${isActive ? '' : 'hidden'}">
+                <div id="${unitId}" class="accordion-content hidden">
                     <div class="accordion-body">
                         <div class="unit-header">
                             <h4>Topics</h4>
@@ -4135,3 +4166,11 @@ function verifyButtonDataMatch() {
 
 // Initialize the page when DOM is loaded
 document.addEventListener('DOMContentLoaded', init);
+
+// Export any functions that need to be used by other modules
+export {
+    initializeTimer,
+    state,
+    apCoursesData,
+    AP_TEST_CONFIG
+};
