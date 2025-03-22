@@ -3583,71 +3583,93 @@ function initializeTimer() {
     }
 }
 
-// Function to generate quiz button for topics
-function handleQuizButtonClick(topic) {
+// Function to handle quiz button clicks
+async function handleQuizButtonClick(topic) {
     console.log('Quiz button clicked for topic:', topic);
     
-    // Find the course and unit for this topic
-    const found = {
-        selectedCourse: null,
-        selectedUnit: null,
-        selectedTopic: null,
-        isSubtopic: false
-    };
+    // Hide course section and show questions section
+    elements.apCourseSection.classList.add('hidden');
+    elements.apQuestionsSection.classList.remove('hidden');
     
-    // Search through all courses and units to find the topic or subtopic
-    for (const courseId in apCoursesData) {
-        const course = apCoursesData[courseId];
-        for (const unit of course.units) {
-            // Check if it's a unit name
-            if (unit.name === topic) {
-                found.selectedCourse = courseId;
-                found.selectedUnit = unit.name;
-                break;
-            }
-            
-            // Check if it's a topic or subtopic
-            for (const topicItem of unit.topics) {
-                if (typeof topicItem === 'object' && topicItem.name) {
-                    // Check if it's a topic name
-                    if (topicItem.name === topic) {
-                        found.selectedCourse = courseId;
-                        found.selectedUnit = unit.name;
-                        found.selectedTopic = topicItem.name;
-                        break;
-                    }
-                    
-                    // Check if it's a subtopic
-                    if (topicItem.subtopics && topicItem.subtopics.includes(topic)) {
-                        found.selectedCourse = courseId;
-                        found.selectedUnit = unit.name;
-                        found.selectedTopic = topicItem.name;
-                        found.isSubtopic = true;
-                        break;
-                    }
-                } else if (topicItem === topic) {
-                    // Legacy format (string topics)
-                    found.selectedCourse = courseId;
-                    found.selectedUnit = unit.name;
-                    found.selectedTopic = topicItem;
-                    break;
-                }
-            }
-            
-            if (found.selectedCourse) break;
+    // Set the title
+    elements.apQuestionsTitle.textContent = `Quiz: ${topic}`;
+    
+    // Show loading screen
+    toggleLoadingScreen(true);
+    elements.loadingScreen.querySelector('p').textContent = 'Generating quiz questions...';
+
+    try {
+        // Make API request to Gemini
+        const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{
+                        text: `Generate 5 challenging AP-level multiple choice questions about "${topic}". 
+                        Each question must:
+                        - Be specific to the topic
+                        - Have exactly 4 options labeled A, B, C, D
+                        - Include one correct answer
+                        - Include a brief explanation for why the answer is correct
+                        
+                        Format as JSON array:
+                        [
+                            {
+                                "question": "question text",
+                                "options": ["A) option1", "B) option2", "C) option3", "D) option4"],
+                                "correctAnswer": "A) option1",
+                                "explanation": "explanation text"
+                            }
+                        ]`
+                    }]
+                }]
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to get response from Gemini API');
         }
-        if (found.selectedCourse) break;
-    }
-    
-    if (found.selectedCourse) {
-        console.log(`Found: Course=${found.selectedCourse}, Unit=${found.selectedUnit}, Topic=${found.selectedTopic}, isSubtopic=${found.isSubtopic}`);
-        generateQuizForTopic(found.selectedCourse, found.selectedUnit, topic, found.isSubtopic, found.selectedTopic);
-    } else {
-        console.error('Could not find course and unit for topic:', topic);
+
+        const data = await response.json();
+        
+        if (!data.candidates?.[0]?.content?.parts?.[0]?.text) {
+            throw new Error('Invalid API response format');
+        }
+
+        // Extract and parse the JSON from the response
+        const generatedText = data.candidates[0].content.parts[0].text;
+        const jsonMatch = generatedText.match(/\[\s*\{.*\}\s*\]/s);
+        
+        if (!jsonMatch) {
+            throw new Error('Could not extract JSON from response');
+        }
+        
+        const questions = JSON.parse(jsonMatch[0]);
+        
+        // Hide loading screen
+        toggleLoadingScreen(false);
+        
+        // Display the questions
+        displayQuizQuestions(questions);
+
+    } catch (error) {
+        console.error('Error generating questions:', error);
+        toggleLoadingScreen(false);
+        
+        // Show error message
+        elements.apQuestionsForm.innerHTML = `
+            <div class="error-message">
+                <p>Sorry, there was an error generating questions. Please try again.</p>
+                <button class="quiz-btn" onclick="handleQuizButtonClick('${topic}')">Retry</button>
+            </div>
+        `;
     }
 }
 
-// Make handleQuizButtonClick globally accessible
+// Make sure handleQuizButtonClick is globally accessible
 window.handleQuizButtonClick = handleQuizButtonClick;
 
 // Function to generate a quiz for a specific topic
@@ -3691,29 +3713,33 @@ function generateQuizForTopic(course, unit, topic, isSubtopic = false, parentTop
 async function generateQuestionsWithAI(topic, courseName, unitName) {
     try {
         // Create a prompt for the AI
-        const prompt = `Generate 5 multiple-choice quiz questions about "${topic}" for ${courseName} ${unitName}. 
-        Each question should have 4 options (A, B, C, D) with one correct answer.
+        const prompt = `Generate 5 multiple-choice AP-level quiz questions about "${topic}" for ${courseName} ${unitName}. 
+        Each question should:
+        - Be challenging but appropriate for AP high school students
+        - Have 4 options (A, B, C, D) with one correct answer
+        - Include a brief explanation for the correct answer
+        - Be directly related to the topic
+        
         Format the response as a JSON array with this structure:
         [
             {
                 "question": "Question text here",
                 "options": ["Option A", "Option B", "Option C", "Option D"],
                 "correctAnswer": "Option that is correct",
-                "explanation": "Brief explanation of why the answer is correct"
+                "explanation": "Brief explanation of why this is correct"
             }
-        ]
-        Make sure the questions are challenging but appropriate for high school AP students.`;
+        ]`;
 
-        // Make API request
-        const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+        // Make API request to Gemini
+        const response = await fetch(GEMINI_API_URL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 contents: [{
                     parts: [{
-                                text: prompt
+                        text: prompt
                     }]
                 }],
                 generationConfig: {
@@ -3723,8 +3749,16 @@ async function generateQuestionsWithAI(topic, courseName, unitName) {
             })
         });
 
+        if (!response.ok) {
+            throw new Error('Failed to get response from Gemini API');
+        }
+
         const data = await response.json();
         
+        if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+            throw new Error('Invalid response format from Gemini API');
+        }
+
         // Extract the generated text
         const generatedText = data.candidates[0].content.parts[0].text;
         
@@ -3734,12 +3768,26 @@ async function generateQuestionsWithAI(topic, courseName, unitName) {
             throw new Error('Could not extract JSON from response');
         }
         
-        // Parse the JSON
+        // Parse and validate the JSON
         const questions = JSON.parse(jsonMatch[0]);
+        
+        // Validate question format
+        if (!Array.isArray(questions) || questions.length === 0) {
+            throw new Error('Invalid question format received');
+        }
+
+        questions.forEach(q => {
+            if (!q.question || !Array.isArray(q.options) || q.options.length !== 4 || !q.correctAnswer || !q.explanation) {
+                throw new Error('Invalid question structure received');
+            }
+        });
+
         return questions;
+
     } catch (error) {
         console.error('Error generating questions with AI:', error);
-        throw error;
+        // Return fallback questions if AI generation fails
+        return generateFallbackQuestions(topic);
     }
 }
 
