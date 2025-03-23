@@ -31,22 +31,14 @@
     <div id="preloader" class="preloader"></div>
     
     <div class="container home-container">
-        <!-- Theme Toggle Button -->
-        <button id="themeToggle" class="theme-toggle">
-            <svg class="sun-icon" viewBox="0 0 24 24">
-                <path d="M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3zm0-2c.28 0 .5-.22.5-.5v-3c0-.28-.22-.5-.5-.5s-.5.22-.5.5v3c0 .28.22.5.5.5zm0 14c-.28 0-.5.22-.5.5v3c0 .28.22.5.5.5s.5-.22.5-.5v-3c0-.28-.22-.5-.5-.5zm8.5-8.5h-3c-.28 0-.5.22-.5.5s.22.5.5.5h3c.28 0 .5-.22.5-.5s-.22-.5-.5-.5zm-14 0h-3c-.28 0-.5.22-.5.5s.22.5.5.5h3c.28 0 .5-.22.5-.5s-.22-.5-.5-.5z"/>
-            </svg>
-            <svg class="moon-icon" viewBox="0 0 24 24">
-                <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
-            </svg>
-        </button>
-
         <div class="about-link">
             <button id="aboutBtn" class="about-btn">About Site</button>
         </div>
 
         <div class="hero-section">
-            <h1 class="hero-title">Scholar Sphere</h1>
+            <div class="logo-container">
+                <img src="../assets/images/logo2.png" alt="Scholar Sphere" class="hero-logo">
+            </div>
             <p class="hero-subtitle">AI-Powered Learning Tools</p>
             <div class="hero-description">
                 <p>Create customized quizzes and grade essays with AI in seconds.</p>
@@ -76,85 +68,82 @@
             </div>
         </div>
 
-        <div class="features-section">
+        <section class="features-section">
             <h2>Features</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2v-4H8v-2h4V7h2v4h4v2h-4v4z"/>
-                        </svg>
-                    </div>
-                    <h3>Text & PDF Support</h3>
-                    <p>Generate quizzes from plain text or upload PDF documents.</p>
+                    <div class="feature-icon">📝</div>
+                    <h3>AI Essay Grading</h3>
+                    <p>Get instant feedback and grades on your essays using advanced AI analysis.</p>
                 </div>
+                
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
-                        </svg>
-                    </div>
-                    <h3>Customizable</h3>
-                    <p>Choose question count, difficulty level, and question types.</p>
+                    <div class="feature-icon">❓</div>
+                    <h3>Custom Quizzes</h3>
+                    <p>Generate personalized quizzes on any topic with adjustable difficulty levels.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
-                        </svg>
-                    </div>
-                    <h3>Timed Quizzes</h3>
-                    <p>Optional timer feature to simulate exam conditions.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm-2 14l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
-                        </svg>
-                    </div>
-                    <h3>Instant Feedback</h3>
-                    <p>Get detailed explanations and scores immediately after submission.</p>
-                </div>
-            </div>
-        </div>
 
-        <div class="how-it-works">
-            <h2>How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Input Your Content</h3>
-                        <p>Enter text directly or upload a PDF document.</p>
-                    </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>AP Test Prep</h3>
+                    <p>Comprehensive preparation for AP exams with subject-specific practice tests and topic quizzes.</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Customize Settings</h3>
-                        <p>Set options like difficulty level, question type, or grading criteria.</p>
-                    </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Timed Practice</h3>
+                    <p>Simulate real exam conditions with customizable timers and countdown features.</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Generate Results</h3>
-                        <p>Our AI creates questions or analyzes your essay.</p>
-                    </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Progress Tracking</h3>
+                    <p>Monitor your improvement with detailed performance analytics and progress indicators.</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Review Results</h3>
-                        <p>Get instant feedback, scores, and explanations.</p>
-                    </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Topic-Specific Practice</h3>
+                    <p>Focus on specific subjects or topics with targeted quizzes and assessments.</p>
                 </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI-Generated Questions</h3>
+                    <p>Get unique, challenging questions generated by AI for endless practice opportunities.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Study anywhere with a fully responsive design that works on all devices.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌙</div>
+                    <h3>Dark Mode</h3>
+                    <p>Reduce eye strain with a dark theme for comfortable studying at night.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Detailed Explanations</h3>
+                    <p>Learn from mistakes with comprehensive explanations for every question.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Practice Tests</h3>
+                    <p>Take full-length practice tests that simulate actual AP exam conditions.</p>
+                </div>
+
+                
             </div>
-            <div class="cta-buttons">
-                <a href="quiz.html" class="btn">Create Quiz</a>
-                <a href="essay.html" class="btn btn-secondary">Grade Essay</a>
-            </div>
-        </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2025 Scholar Sphere. All rights reserved.</p>
+        </footer>
     </div>
 
     <div id="aboutModal" class="modal hidden">
@@ -174,10 +163,6 @@
             </div>
         </div>
     </div>
-
-    <footer class="footer">
-        <p>&copy; 2023 Scholar Sphere. All rights reserved.</p>
-    </footer>
 
     <script src="../assets/js/modules/config.js" type="module"></script>
     <script src="../assets/js/home.js" type="module"></script>

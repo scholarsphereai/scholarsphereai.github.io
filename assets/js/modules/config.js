@@ -1,11 +1,11 @@
 // API configuration
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent';
-const GEMINI_API_KEY = 'AIzaSyDt1DYSOVz17eacgowTXL__MOLcpiPGsek';
-const MODEL_ID = 'gemini-2.0-flash';
-const USE_LOCAL_GENERATION = false; // Set to false to use Gemini API
+export const GEMINI_API_KEY = 'AIzaSyDt1DYSOVz17eacgowTXL__MOLcpiPGsek';
+export const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent';
+export const MODEL_ID = 'gemini-2.0-flash';
+export const USE_LOCAL_GENERATION = false; // Set to false to use Gemini API
 
 // AP Tests Configuration
-const AP_CONFIG = {
+export const AP_CONFIG = {
     // Default exam settings
     examDuration: 90 * 60, // 90 minutes in seconds
     questionsPerTest: 45,  // Default number of questions
@@ -34,10 +34,7 @@ if (!GEMINI_API_KEY || GEMINI_API_KEY === 'YOUR_ACTUAL_GEMINI_API_KEY') {
     USE_LOCAL_GENERATION = true;
 }
 
-export { 
-    GEMINI_API_KEY,
-    GEMINI_API_URL,
-    MODEL_ID,
-    USE_LOCAL_GENERATION,
-    AP_CONFIG
-}; 
+// Add these exports if they don't exist
+export const API_KEY = 'your-api-key';
+export const API_URL = 'your-api-url';
+export const MODEL_ID = 'your-model-id'; 

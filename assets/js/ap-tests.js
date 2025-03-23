@@ -3739,7 +3739,7 @@ async function generateQuestionsWithAI(topic, courseName, unitName) {
             body: JSON.stringify({
                 contents: [{
                     parts: [{
-                        text: prompt
+                                text: prompt
                     }]
                 }],
                 generationConfig: {
@@ -3758,7 +3758,7 @@ async function generateQuestionsWithAI(topic, courseName, unitName) {
         if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
             throw new Error('Invalid response format from Gemini API');
         }
-
+        
         // Extract the generated text
         const generatedText = data.candidates[0].content.parts[0].text;
         
@@ -4222,3 +4222,25 @@ export {
     apCoursesData,
     AP_TEST_CONFIG
 };
+
+// Update the displayResults function to remove the Try Another Set button
+function displayResults(results) {
+    const resultsContent = `
+        <div class="results-content">
+            <div class="total-score">
+                <h2>Quiz Results</h2>
+                <div class="score-display">
+                    <span class="score-number">${results.score}%</span>
+                </div>
+            </div>
+            <div class="results-buttons">
+                <button class="btn btn-secondary" onclick="returnToTopics()">
+                    Return to Topics
+                </button>
+            </div>
+            <!-- Rest of your results display code -->
+        </div>
+    `;
+    
+    elements.apQuestionsForm.innerHTML = resultsContent;
+}
