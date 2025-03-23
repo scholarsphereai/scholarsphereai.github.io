@@ -447,12 +447,27 @@
     color: var(--text-color);
 }
 
+/* Update grade display styles */
 .grade-display {
-    font-size: 4rem;
+    font-size: 200px; /* Match the score-number size */
     font-weight: 700;
     color: var(--primary-color);
-    margin: 1.5rem 0;
     text-align: center;
+    line-height: 1;
+    margin: 1rem 0;
+    display: block;
+}
+
+/* Dark theme adjustment */
+[data-theme="dark"] .grade-display {
+    color: #7A7CFF;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .grade-display {
+        font-size: 120px;
+    }
 }
 
 /* Dark theme adjustments for essay grader */
@@ -1539,7 +1554,7 @@ input:checked + .slider:before {
 }
 
 .grade-display {
-    font-size: 2.5rem;
+    font-size: 50rem;
     font-weight: 700;
     color: var(--primary-color);
     text-align: center;
@@ -2010,27 +2025,52 @@ input:checked + .slider:before {
 
 .total-score {
     text-align: center;
-    margin-bottom: 40px;
-    padding: 30px;
+    margin-bottom: 2rem;
+    padding: 2rem;
     background: var(--card-background);
-    border-radius: var(--border-radius);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
 }
 
 .score-display {
-    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 .score-number {
-    font-size: 48px;
-    font-weight: bold;
+    font-size: 200px;
+    font-weight: 800;
     color: var(--primary-color);
+    line-height: 1;
     display: block;
+    margin: 0;
+    padding: 0;
+    text-align: center;
 }
 
 .score-details {
-    font-size: 18px;
+    font-size: 1.5rem;
     color: var(--text-secondary);
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .score-number {
+    color: #7A7CFF;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .score-number {
+        font-size: 120px;
+    }
+    
+    .score-details {
+        font-size: 1.2rem;
+    }
 }
 
 .question-result {
@@ -2136,7 +2176,7 @@ input:checked + .slider:before {
     h3 { font-size: 1.25rem; }
 
     .score-number {
-        font-size: 2.5rem;
+        font-size: 200px; /* Reduced size for mobile but still large */
     }
 
     .question-header {
@@ -2574,7 +2614,7 @@ input[type="number"]:focus {
 .progress-dot.active {
     background: var(--primary-color);
     transform: scale(1.2);
-    box-shadow: 0 0 0 3px rgba(75, 78, 252, 0.2);
+    box-shadow: 0 0 0 2px rgba(75, 78, 252, 0.2);
 }
 
 .progress-dot.completed {
@@ -4569,5 +4609,212 @@ section h2::after, .section-title::after {
     .hero-section {
         padding: 0.75rem 0;
         gap: 0.5rem;
+    }
+}
+
+/* Quiz Results Styling */
+.results-section {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.results-content {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+.total-score {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: var(--card-background);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+}
+
+.score-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.score-number {
+    font-size: 200px;
+    font-weight: 800;
+    color: var(--primary-color);
+    line-height: 1;
+    display: block;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.score-details {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .score-number {
+    color: #7A7CFF;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .score-number {
+        font-size: 120px;
+    }
+    
+    .score-details {
+        font-size: 1.2rem;
+    }
+}
+
+.question-result {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.question-result.correct {
+    background-color: rgba(40, 167, 69, 0.1);
+    border-color: rgba(40, 167, 69, 0.2);
+}
+
+.question-result.incorrect {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-color: rgba(220, 53, 69, 0.2);
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.result-status {
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+}
+
+.result-status.correct {
+    background-color: #28a745;
+    color: white;
+}
+
+.result-status.incorrect {
+    background-color: #dc3545;
+    color: white;
+}
+
+.question-text {
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+
+.answer-text {
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+}
+
+.answer-text.correct-answer {
+    color: #28a745;
+    font-weight: 500;
+}
+
+.answer-text.wrong-answer {
+    color: #dc3545;
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .question-result.correct {
+    background-color: rgba(40, 167, 69, 0.15);
+    border-color: rgba(40, 167, 69, 0.3);
+}
+
+[data-theme="dark"] .question-result.incorrect {
+    background-color: rgba(220, 53, 69, 0.15);
+    border-color: rgba(220, 53, 69, 0.3);
+}
+
+/* Results buttons */
+.results-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .score-number {
+        font-size: 200px; /* Reduced size for mobile but still large */
+    }
+
+    .score-details {
+        font-size: 1rem;
+    }
+
+    .results-section {
+        padding: 1rem;
+    }
+
+    .results-content {
+        padding: 1.5rem;
+    }
+}
+
+/* Add these new styles */
+.grade-percentage {
+    text-align: center;
+    padding: 3rem 0;
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+.percentage-display {
+    font-size: 15rem;
+    font-weight: 800;
+    line-height: 1;
+    color: #4B4EFC;
+    margin: 0;
+    padding: 0;
+}
+
+.points-display {
+    font-size: 2rem;
+    color: #666;
+    margin-top: 1rem;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .percentage-display {
+    color: #7A7CFF;
+}
+
+[data-theme="dark"] .points-display {
+    color: #999;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .percentage-display {
+        font-size: 10rem;
+    }
+    
+    .points-display {
+        font-size: 1.5rem;
     }
 }
