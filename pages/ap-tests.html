@@ -42,6 +42,15 @@
                 <button id="aboutBtn" class="about-btn">About Site</button>
             </div>
         </nav>
+        <!-- Theme Toggle Button -->
+        <button id="themeToggle" class="theme-toggle">
+            <svg class="sun-icon" viewBox="0 0 24 24">
+                <path d="M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3zm0-2c.28 0 .5-.22.5-.5v-3c0-.28-.22-.5-.5-.5s-.5.22-.5.5v3c0 .28.22.5.5.5zm0 14c-.28 0-.5.22-.5.5v3c0 .28.22.5.5.5s.5-.22.5-.5v-3c0-.28-.22-.5-.5-.5zm8.5-8.5h-3c-.28 0-.5.22-.5.5s.22.5.5.5h3c.28 0 .5-.22.5-.5s-.22-.5-.5-.5zm-14 0h-3c-.28 0-.5.22-.5.5s.22.5.5.5h3c.28 0 .5-.22.5-.5s-.22-.5-.5-.5z"/>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24">
+                <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+            </svg>
+        </button>
 
         <!-- Loading Screen -->
         <div id="loadingScreen" class="loading-screen">
@@ -176,12 +185,6 @@
                 <h2 id="apQuestionsTitle">Unit Questions</h2>
             </div>
 
-            <!-- Add this right after the ap-questions-header div -->
-            <div class="grade-percentage">
-                <div class="percentage-display">20%</div>
-                <div class="points-display">100.0 out of 500 points</div>
-            </div>
-
             <div class="timer-container hidden" id="timerContainer">
                 <div class="timer">
                     <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
@@ -205,9 +208,9 @@
             <div class="results-content">
                 <div class="total-score">
                     <h2>Practice Test Results</h2>
-                    <div class="score-display" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 0;">
-                        <div class="score-number" style="font-size: 15rem; font-weight: 800; line-height: 1; color: #4B4EFC; margin: 0; padding: 0; text-align: center; display: block;">0%</div>
-                        <div class="score-details" style="font-size: 2rem; margin-top: 2rem; color: #666;">0 out of 500 points</div>
+                    <div class="score-display">
+                        <div class="score-number">20%</div>
+                        <div class="score-details">100.0 out of 500 points</div>
                     </div>
                 </div>
                 <div id="apResultsContainer">

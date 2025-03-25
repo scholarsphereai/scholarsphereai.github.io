@@ -3926,15 +3926,10 @@ function displayQuizResults(answers, score, totalQuestions) {
     elements.apQuestionsSection.classList.add('hidden');
     elements.apResultsSection.classList.remove('hidden');
     
-    // Calculate percentage from points
-    const totalPoints = 500;
-    const earnedPoints = 100;
-    const percentageScore = Math.round((earnedPoints / totalPoints) * 100);
-    
-    // Update the new percentage display
-    document.querySelector('.percentage-display').textContent = `${percentageScore}%`;
-    document.querySelector('.points-display').textContent = 
-        `${earnedPoints} out of ${totalPoints} points`;
+    // Update score display
+    document.querySelector('.score-number').textContent = `${Math.round(score)}%`;
+    document.querySelector('.score-details').textContent = 
+        `${answers.filter(a => a.isCorrect).length} out of ${totalQuestions} correct`;
     
     // Clear previous results
     const resultsContainer = document.getElementById('apResultsContainer');
@@ -4017,6 +4012,9 @@ function init() {
         elements.apQuestionsSection.classList.add('hidden');
         elements.apCourseSection.classList.remove('hidden');
     });
+    
+    // Initialize theme
+    initializeTheme();
     
     // Initialize modal
     initializeModal();
@@ -4152,6 +4150,26 @@ function generateUnitsAccordion(units) {
             // Toggle content visibility
             content.classList.toggle('hidden');
         });
+    });
+}
+
+// Function to initialize theme
+function initializeTheme() {
+    const themeToggle = document.getElementById('themeToggle');
+    
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+    
+    // Add event listener to theme toggle
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
     });
 }
 

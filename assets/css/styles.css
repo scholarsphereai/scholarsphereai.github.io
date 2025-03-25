@@ -2040,21 +2040,19 @@ input:checked + .slider:before {
 }
 
 .score-number {
-    font-size: 200px;
+    font-size: 400px;
     font-weight: 800;
     color: var(--primary-color);
     line-height: 1;
     display: block;
     margin: 0;
     padding: 0;
-    text-align: center;
 }
 
 .score-details {
     font-size: 1.5rem;
     color: var(--text-secondary);
-    margin-top: 1rem;
-    text-align: center;
+    margin-top: -2rem;
 }
 
 /* Dark theme adjustments */
@@ -2070,6 +2068,7 @@ input:checked + .slider:before {
     
     .score-details {
         font-size: 1.2rem;
+        margin-top: -1rem;
     }
 }
 
@@ -4773,48 +4772,5 @@ section h2::after, .section-title::after {
 
     .results-content {
         padding: 1.5rem;
-    }
-}
-
-/* Add these new styles */
-.grade-percentage {
-    text-align: center;
-    padding: 3rem 0;
-    margin: 2rem auto;
-    max-width: 800px;
-}
-
-.percentage-display {
-    font-size: 15rem;
-    font-weight: 800;
-    line-height: 1;
-    color: #4B4EFC;
-    margin: 0;
-    padding: 0;
-}
-
-.points-display {
-    font-size: 2rem;
-    color: #666;
-    margin-top: 1rem;
-}
-
-/* Dark theme support */
-[data-theme="dark"] .percentage-display {
-    color: #7A7CFF;
-}
-
-[data-theme="dark"] .points-display {
-    color: #999;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-    .percentage-display {
-        font-size: 10rem;
-    }
-    
-    .points-display {
-        font-size: 1.5rem;
     }
 }
